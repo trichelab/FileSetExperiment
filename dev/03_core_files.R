@@ -1,5 +1,5 @@
 ## Did you miss the previous step? The one about setting up Git and GitHub
-rstudioapi::navigateToFile(usethis::proj_path("dev", "02_git_github_setup.R"))
+##rstudioapi::navigateToFile(usethis::proj_path("dev", "02_git_github_setup.R"))
 
 ## ***********************************************************
 ## Setup the core files for your Bioconductor-friendly package
@@ -68,10 +68,13 @@ usethis::use_test("example_test") ## You need at least one test to run covr
 usethis::use_coverage()
 
 ## Re-knit your README.Rmd file to update your README.md file
+# devtools::build_readme() # oops, error 
+# Need to install the package first!
+devtools::install()
 devtools::build_readme()
 
 ## Add a vignette template
-pkg <- basename(usethis::proj_get())
+pkg <- basename(usethis::proj_get()) 
 biocthis::use_bioc_vignette(pkg, paste("Introduction to", pkg))
 
 ## Add a Bioconductor-friendly GitHub actions workflow to check your package

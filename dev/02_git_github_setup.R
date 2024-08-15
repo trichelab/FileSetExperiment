@@ -1,5 +1,5 @@
 ## Did you miss the previous step? The one about creating your package
-rstudioapi::navigateToFile(usethis::proj_path("dev", "01_create_pkg.R"))
+## rstudioapi::navigateToFile(usethis::proj_path("dev", "01_create_pkg.R"))
 
 ## ********************
 ## Setup Git and GitHub
@@ -8,7 +8,7 @@ rstudioapi::navigateToFile(usethis::proj_path("dev", "01_create_pkg.R"))
 ## Note that Bioconductor doesn't allow *.Rproj files
 ## So we have to ignore it before anything else
 usethis::use_git_ignore("*.Rproj")
-usethis::use_git() ## Choose the option to make the commit, then to restart RStudio
+usethis::use_git() ## Choose the option to make the commit
 ## If you don't have git installed, you will likely benefit from reading
 ## "Happy Git and GitHub for the useR" at https://happygitwithr.com/.
 
@@ -40,7 +40,7 @@ gitcreds::gitcreds_set()
 ## .Renviron file with contents like (note the empty line at the end!):
 # GITHUB_PAT=YOUR_40_CHARACTERS_TOKEN
 #
-usethis::edit_r_environ()
+## usethis::edit_r_environ()
 ## Then re-start your R session.
 rstudioapi::restartSession()
 ## Editing the .Renviron is strongly discouraged now since it stores as
@@ -48,7 +48,8 @@ rstudioapi::restartSession()
 ## more secure approach provided by gitcreds.
 
 ## Now run use_github()
-usethis::use_github()
+## (done previously during setup)
+## usethis::use_github(organisation="trichelab")
 ## Follow any prompts, such as running on the terminal:
 ## git push --set-upstream origin devel
 
