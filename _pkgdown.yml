@@ -1,0 +1,5 @@
+url: https://trichelab.github.io/FileSetExperiment/
+template:
+  bootstrap: 5
+  bootswatch: cerulean
+

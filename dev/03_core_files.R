@@ -116,6 +116,7 @@ devtools::install()
 ## from GitHub actions will work. This creates the gh-pages branch in your
 ## GitHub repository in such a way that pkgdown will recognize it and be
 ## able to use it later.
+usethis::use_pkgdown_github_pages()
 pkgdown::deploy_to_branch() ## Check the WARNING above before running this!
 
 ## For more details about package development, check:

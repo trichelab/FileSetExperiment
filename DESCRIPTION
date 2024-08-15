@@ -1,18 +1,22 @@
 Package: FileSetExperiment
-Title: What the Package Does (One Line, Title Case)
+Title: A rectangular FileSet-backed object with rowData and colData
 Version: 0.99.0
 Date: 2024-08-15
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Tim", "Triche", , "trichelab@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-5665-946X"))
+Description: A FileSetExperiment is a SummarizedExperiment backed by FileSets.
 License: Artistic-2.0
-URL: https://github.com/trichelab/FileSetExperiment
+URL: https://github.com/trichelab/FileSetExperiment, https://trichelab.github.io/FileSetExperiment/
 BugReports: https://support.bioconductor.org/tag/FileSetExperiment
 biocViews: Software
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends:
+    SummarizedExperiment,
+    sesame,
+    S7
 Suggests: 
     BiocStyle,
     knitr,
