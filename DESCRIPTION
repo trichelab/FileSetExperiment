@@ -3,7 +3,9 @@ Title: A rectangular FileSet-backed object with rowData and colData
 Version: 0.99.0
 Date: 2024-08-15
 Authors@R: 
-    person("Tim", "Triche", , "trichelab@gmail.com", role = c("aut", "cre"),
+    person("Tim", "Triche", , 
+           email = "trichelab@gmail.com", 
+           role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5665-946X"))
 Description: A FileSetExperiment is a SummarizedExperiment backed by FileSets.
 License: Artistic-2.0
