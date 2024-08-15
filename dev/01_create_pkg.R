@@ -49,7 +49,7 @@ available::available("FileSetExperiment")
 ## to check that your package name is not taken and that it doesn't have
 ## a meaning that you might not be aware of.
 
-## done previously 
+## done previously
 ## usethis::create_package("FileSetExperiment")
 ## This opens a new window in RStudio
 
