@@ -13,7 +13,7 @@ output:
     toc_depth: 2
     code_folding: show
 date: "`r doc_date()`"
-package: "`r pkg_ver('FileSetExperiment')`"
+package: FileSetExperiment
 vignette: >
   %\VignetteIndexEntry{Introduction to FileSetExperiment}
   %\VignetteEngine{knitr::rmarkdown}
@@ -23,7 +23,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE,
-    comment = "#>",
+    comment = "# ",
     crop = NULL ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html
 )
 ```
@@ -32,21 +32,6 @@ knitr::opts_chunk$set(
 ```{r vignetteSetup, echo=FALSE, message=FALSE, warning = FALSE}
 ## Track time spent on making the vignette
 startTime <- Sys.time()
-
-## Bib setup
-library("RefManageR")
-
-## Write bibliography information
-bib <- c(
-    R = citation(),
-    BiocStyle = citation("BiocStyle")[1],
-    knitr = citation("knitr")[1],
-    RefManageR = citation("RefManageR")[1],
-    rmarkdown = citation("rmarkdown")[1],
-    sessioninfo = citation("sessioninfo")[1],
-    testthat = citation("testthat")[1],
-    FileSetExperiment = citation("FileSetExperiment")[1]
-)
 ```
 
 # Basics
@@ -78,33 +63,19 @@ As package developers, we try to explain clearly how to use our packages and in 
 
 ## Citing `FileSetExperiment`
 
-We hope that `r Biocpkg("FileSetExperiment")` will be useful for your research. Please use the following information to cite the package and the overall approach. Thank you!
+We hope that `r Biocpkg("FileSetExperiment")` will be useful for your research. Please cite the package accordingly:
 
-```{r "citation"}
-## Citation info
-citation("FileSetExperiment")
-```
+( add citation here; using `citation` causes pkgdown errors ) 
 
 # Quick start to using `FileSetExperiment`
 
-```{r "start", message=FALSE}
+```{r start, message=FALSE}
 library("FileSetExperiment")
 ```
 
 # Reproducibility
 
-The `r Biocpkg("FileSetExperiment")` package was made possible thanks to:
-
-* R `r Citep(bib[["R"]])`
-* `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
-* `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
-* `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
-* `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
-* `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
-* `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
-
 This package was developed using `r BiocStyle::Biocpkg("biocthis")`.
-
 
 Code for creating the vignette
 
