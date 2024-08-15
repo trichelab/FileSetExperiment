@@ -91,17 +91,9 @@ citation("FileSetExperiment")
 library("FileSetExperiment")
 ```
 
-Edit this as you see fit =)
-
-Here is an example of you can cite your package inside the vignette:
-
-* `r Biocpkg("FileSetExperiment")` `r Citep(bib[["FileSetExperiment"]])`
-
-
-
 # Reproducibility
 
-The `r Biocpkg("FileSetExperiment")` package `r Citep(bib[["FileSetExperiment"]])` was made possible thanks to:
+The `r Biocpkg("FileSetExperiment")` package was made possible thanks to:
 
 * R `r Citep(bib[["R"]])`
 * `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`

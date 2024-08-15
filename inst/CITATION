@@ -7,7 +7,7 @@ pkgVer <- function(pkg) {
 c(
 
     bibentry(bibtype="manual",
-        title = "",
+        title = "FileSetExperiment",
         author = personList(
             as.person("trichelab")
         ),
@@ -17,7 +17,7 @@ c(
         doi = '10.18129/B9.bioc.FileSetExperiment'
     ),
     bibentry(bibtype="article",
-        title = "",
+        title = "Analysis of large cohorts with FileSeteExperiment objects",
         author = personList(
             as.person("trichelab")
         ),
