@@ -10,3 +10,5 @@ setClass("FileSet",
                         n="integer",              # nrow
                         m="integer"))             # ncol
 
+
+

@@ -1,91 +1,64 @@
+# Make generic SummarizedExperiment-derived objects behave as if minfi objects:
+
+
 # generic replace method 
-.grm <- function(object, value, s) { slot(object, s) <- value; return(object) }
-
-
-# Make generic SummarizedExperiment-derived objects behave as if minfi objects.
-if (!isGeneric("getGreen")) 
-  setGeneric("getGreen", function(object) assay(object, "Green"))
-setMethod("getGreen", "SummarizedExperiment", 
-          function(object) assay(object, "Green"))
-
-if (!isGeneric("getRed")) 
-  setGeneric("getRed", function(object) assay(object, "Red"))
-setMethod("getRed", "SummarizedExperiment", 
-          function(object) assay(object, "Red"))
-
-if (!isGeneric("annotation")) {
-  setGeneric("annotation", function(object, ...) slot(object, "annotation"))
+.set <- function(object, value, ..., x, what=c("slot", "assay", "meta")) { 
+  what <- match.arg(what)
+  if (what == "slot") slot(object, x) <- value
+  if (what == "assay") assay(object, x) <- value
+  if (what == "meta") metadata(object)[[x]] <- value
+  return(object) 
 }
-setMethod("annotation", "SummarizedExperiment", 
-          function(object, ...) metadata(object)$annotation)
 
-if (!isGeneric("annotation<-")) {
-  setGeneric("annotation<-", 
-             function(object, value) .grm(object, value, "annotation"))
-}
-setReplaceMethod("annotation", 
-                 c(object="SummarizedExperiment", value="ANY"),
-                 function(object, ..., value) {
-                   metadata(object)$annotation <- value
-                   return(object)
-                 })
 
-if (!isGeneric("preprocessMethod")) {
-  setGeneric("preprocessMethod", function(object) object@preprocessMethod)
+# what we are getting and setting
+SE <- "SummarizedExperiment"
+asys <- c("Red", "Green", "Beta", "CN")
+slots <- c("annotation", "preprocessMethod")
+
+
+# getters
+for (x in c(asys, slots)) {
+  m <- ifelse(x %in% asys, paste0("get", x), x)
+  if (x %in% asys) {
+    setGeneric(m, function(object) assay(object, x))
+    setMethod(m, SE, function(object) assay(object, x))
+  } 
+  if (x %in% slots) {
+    setGeneric(m, function(object, ...) slot(object, x))
+    setMethod(m, SE, function(object, ...) metadata(object)[[x]])
+  }
 }
-setMethod("preprocessMethod", "SummarizedExperiment", 
-          function(object) metadata(object)$preprocessMethod)
+
+
+# setters
+for (x in slots) {
+  m <- paste0(x, "<-")
+  setGeneric(m, function(object, value) .set(object, value, x, "slot"))
+  setReplaceMethod(x, SE, 
+                   function(object, value) .set(object, value, x, "meta"))
+}
+
 
 # helper fn
-if (!isGeneric("preprocessMethod<-")) {
-  setGeneric("preprocessMethod<-",
-             function(object, ..., value) {
-               object@preprocessMethod <- value
-               return(object)
-             })
-}
-setReplaceMethod("preprocessMethod", 
-                 c(object="SummarizedExperiment", value="ANY"),
-                 function(object, ..., value) {
-                   metadata(object)$preprocessMethod <- value
-                   return(object)
-                 })
+B2M <- function(p) log2(p / (1 - p))
+setGeneric("getM", function(object) assay(object, "M"))
+setMethod("getM", SE, function(object) B2M(getBeta(object)))
 
-# helper fn
-.M2B <- function(x) (2 ** x) / (1 + (2 ** x))
 
-# helper fn
-.B2M <- function(p) log2(p / (1 - p))
+# relatively simple hacks
+setGeneric("getMeth", function(object) assay(object, "Meth"))
+setMethod("getMeth", SE, function(object) getBeta(object)*(2 ** getCN(object)))
+setGeneric("getUnmeth", function(object) assay(object, "Unmeth"))
+setMethod("getUnmeth",SE,function(object)(1-getBeta(object))*(2**getCN(object)))
 
-# using the above 
-if (!isGeneric("getBeta")) setGeneric("getBeta")
-setMethod("getBeta", "SummarizedExperiment", 
-          function(object, ...) {
-            if ("Beta" %in% assayNames(object)) assay(object, "Beta")
-            else if ("M" %in% assayNames(object)) .M2B(assay(object, "M"))
-            else stop("No Beta or M assay found")
-          })
 
-# also using the above
-if (!isGeneric("getM")) setGeneric("getM")
-setMethod("getM", "SummarizedExperiment", 
-          function(object, ...) {
-            if ("M" %in% assayNames(object)) assay(object, "M")
-            else if ("Beta" %in% assayNames(object)) .B2M(assay(object, "Beta"))
-            else stop("No Beta or M assay found")
-          })
+# add a `seqinfo` method for SummarizedExperiment objects that are NOT Ranged
+setMethod("seqinfo", "SummarizedExperiment", 
+          function(x) Seqinfo(genome=metadata(x)[["genome"]]))
+# the above is a bit of a kludge but allows one to use the locus and/or block
+# coordinates for an array corresponding to the appropriate assembly on-the-fly
 
-if (!isGeneric("getCN")) setGeneric("getCN")
-setMethod("getCN", "SummarizedExperiment", 
-          function(object, ...) assay(object, "CN"))
-
-if (!isGeneric("getMeth")) setGeneric("getMeth")
-setMethod("getMeth", "SummarizedExperiment", 
-          function(object) getBeta(object) * (2 ** getCN(object)))
-
-if (!isGeneric("getUnmeth")) setGeneric("getUnmeth")
-setMethod("getUnmeth", "SummarizedExperiment", 
-          function(object) (1 - getBeta(object)) * (2 ** getCN(object)))
 
 # FileSet generics for sesame fileSets 
 setMethod("nrow", "FileSet", function(x) x@n)
@@ -144,6 +117,7 @@ setAs("FileSet", "fileSet",
         class(res) <- "fileSet"
         return(res)
       })
+
 
 # selections
 setMethod("[", 
