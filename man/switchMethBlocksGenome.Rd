@@ -12,17 +12,11 @@ switchMethBlocksGenome(x, to = c("hg38", "hg19"))
 \item{to}{the new genome to use (hg19 or hg38)}
 }
 \value{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{     an object very much like x, but mapped onto `g`
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     an object very much like x, but mapped onto `to`
 }\if{html}{\out{</div>}}
 }
 \description{
 Given an object with methylation block coordinates, switch the genome
-}
-\details{
-\code{stable} is a weird flag and you probably should not use it. If and only if
-a probe maps to the same region in hg19 and hg38, it is deemed stable. That
-region can be one base pair wide, or it can be a thousand base pairs wide.
-The point is that this set of mappings is very small (about 4000 probes).
 }
 \seealso{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{    asMethBlocks

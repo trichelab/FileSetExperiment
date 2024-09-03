@@ -3,17 +3,10 @@
 #' @param x         a GenomicRatioSet or something like it with methBlock coords
 #' @param to        the new genome to use (hg19 or hg38) 
 #'
-#' @return          an object very much like x, but mapped onto `g`
-#' 
-#' @details
-#' `stable` is a weird flag and you probably should not use it. If and only if 
-#' a probe maps to the same region in hg19 and hg38, it is deemed stable. That
-#' region can be one base pair wide, or it can be a thousand base pairs wide. 
-#' The point is that this set of mappings is very small (about 4000 probes). 
+#' @return          an object very much like x, but mapped onto `to`
 #' 
 #' @seealso         asMethBlocks
 #'
-#' @import          BiocParallel 
 #' @import          GenomicRanges 
 #'
 #' @export
@@ -37,8 +30,8 @@ switchMethBlocksGenome <- function(x, to=c("hg38", "hg19")) {
     message("Found ", mapped, " / ", mappable, 
             " blocks mapping from ", from, " to ", to, ".")
     x <- x[rownames(mb), ]
+    rowRanges(x) <- as(mb[[to]], "GRanges")
     rownames(x) <- mb[[to]]
-    rowRanges(x) <- as(mb[x, to], "GRanges")
     genome(x) <- to
     return(x)
   } 
