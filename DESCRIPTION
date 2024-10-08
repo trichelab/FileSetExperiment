@@ -1,7 +1,7 @@
 Package: FileSetExperiment
 Title: A rectangular FileSet-backed object with rowData and colData
-Version: 0.99.3
-Date: 2024-09-02
+Version: 0.99.4
+Date: 2024-10-08
 Authors@R: 
     person("Tim", "Triche", , 
            email = "trichelab@gmail.com", 

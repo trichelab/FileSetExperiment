@@ -3,7 +3,7 @@
 \name{byExtremality}
 \alias{byExtremality}
 \title{For array-based DNA methylation, particularly summarized across regions,
-we can do better (a lot better) than MAD.  Since we know that}
+we can do better (a lot better) than MAD or SD.  Since we know that}
 \usage{
 byExtremality(x, k = 500)
 }
@@ -19,7 +19,7 @@ the most extremal \emph{k} rows of \emph{x} (returns the same class as \emph{x})
 max(SD(X_j)) if X_j ~ Beta(a, b) < max(SD(X_j)) if X_j ~ Bernoulli(a/(a+b))
 }
 \details{
-for X having a known mean and SD, hence solvable for a + b by MoM, define
+for X with known mean and SD, hence solvable for a + b by MoM, we can define
 
 extremality = sd(X_j) / bernoulliSD(mean(X_j))
 
