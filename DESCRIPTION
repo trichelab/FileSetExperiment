@@ -1,7 +1,7 @@
 Package: FileSetExperiment
 Title: A rectangular FileSet-backed object with rowData and colData
-Version: 0.99.4
-Date: 2024-10-08
+Version: 0.99.5
+Date: 2024-10-09
 Authors@R: 
     person("Tim", "Triche", , 
            email = "trichelab@gmail.com", 
@@ -17,14 +17,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Depends:
     SummarizedExperiment,
-    sesame,
-    S7
+    sesame
 Suggests: 
     BiocStyle,
     knitr,
     RefManageR,
     rmarkdown,
     sessioninfo,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    plotly,
+    S7
 Config/testthat/edition: 3
 VignetteBuilder: knitr
